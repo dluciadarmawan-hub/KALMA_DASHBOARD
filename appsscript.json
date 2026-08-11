@@ -1,0 +1,20 @@
+{
+  "timeZone": "Asia/Jakarta",
+  "dependencies": {
+    "libraries": [
+      {
+        "userSymbol": "KalmaCore",
+        "version": "3",
+        "libraryId": "1LfvqpVBanzLs9HxDkxGvmj-vUDBCIwoe87ogs3mN6qfT4WW8wSVFNUdo",
+        "developmentMode": false
+      }
+    ]
+  },
+  "exceptionLogging": "STACKDRIVER",
+  "runtimeVersion": "V8",
+  "oauthScopes": [
+    "https://www.googleapis.com/auth/script.external_request",
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/userinfo.email"
+  ]
+}

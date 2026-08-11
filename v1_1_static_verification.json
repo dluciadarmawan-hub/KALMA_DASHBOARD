@@ -1,0 +1,27 @@
+{
+  "status": "STATIC_PASS",
+  "zip_integrity": "PASS",
+  "clasp_json_exists": true,
+  "appsscript_json_exists": true,
+  "js_syntax": "PASS",
+  "ui_script_syntax": "PASS",
+  "appendRow": 0,
+  "setValue": 0,
+  "setValues": 0,
+  "deleteRow": 0,
+  "deleteRows": 0,
+  "clearContent": 0,
+  "posting": "0 code path added",
+  "sync": "0 code path added",
+  "ledger_mutation": "0 code path added",
+  "production_reader_fix": [
+    "wide_date_reader_disabled",
+    "safe_pack_guard_added",
+    "date_serial_rejected",
+    "absurd_pack_rejected",
+    "date_text_rejected"
+  ],
+  "zip_entries": 35,
+  "duplicate_entries": 0,
+  "sha256": "2fa1aba04c7c91e4cc1126ea86c7be4c95f8152a3409f2ce98ec22fec81a4524"
+}

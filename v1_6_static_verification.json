@@ -1,0 +1,17 @@
+{
+  "status": "STATIC_PASS",
+  "build": "V1_6_STOCK_TASK_READER_FIX",
+  "checks": {
+    "zip_integrity": "PENDING",
+    "js_syntax": "PASS",
+    "ui_html_present": true,
+    "write_calls": {
+      "appendRow": 0,
+      "setValue": 0,
+      "setValues": 0,
+      "deleteRow": 0,
+      "deleteRows": 0,
+      "clearContent": 0
+    }
+  }
+}

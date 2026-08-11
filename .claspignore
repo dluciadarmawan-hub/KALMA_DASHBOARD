@@ -1,0 +1,5 @@
+**/.git/**
+**/node_modules/**
+release_docs/**
+README_NOT_CLASP_READY.md
+.clasp.json.template

@@ -1,0 +1,187 @@
+{
+  "project": "KALMA OWNER DASHBOARD",
+  "build": "OWNERDASH_20260706_V05",
+  "baselineZip": "OWNERDASH_20260627_V04A.zip",
+  "baselineSha256": "75042d07ea58717acee92224d5c4cbc350dfe3498f8efb6debd042e43f70b6fa",
+  "centralAuthLibraryDependency": {
+    "status": "PASS",
+    "userSymbol": "KalmaCore",
+    "version": "3",
+    "libraryId": "1LfvqpVBanzLs9HxDkxGvmj-vUDBCIwoe87ogs3mN6qfT4WW8wSVFNUdo",
+    "requiredCall": "KalmaCore.requireStaffRole(pin, \"OWNER_DASHBOARD\", allowedRoles)"
+  },
+  "authFlowBeforeAfter": [
+    {
+      "surface": "Dashboard load",
+      "before": "kodGetOwnerDashboardV0() public read after spreadsheet authorization gate only",
+      "after": "kodGetOwnerDashboardV0(payload) requires server-side Central Auth session via kodRequireDashboardSession_"
+    },
+    {
+      "surface": "Login",
+      "before": "No project login endpoint in Owner Dashboard",
+      "after": "kodLoginOwnerDashboardV1 calls KalmaCore.requireStaffRole and creates server CacheService session"
+    },
+    {
+      "surface": "Session validate",
+      "before": "No server session validate endpoint",
+      "after": "kodValidateOwnerDashboardSessionV1 validates server session token"
+    },
+    {
+      "surface": "Manual auth runner",
+      "before": "kodAuthorizeOwnerDashboard() could be called without app session",
+      "after": "kodAuthorizeOwnerDashboard(payload) requires OWNER-only server session"
+    }
+  ],
+  "roleGuardBeforeAfter": [
+    {
+      "surface": "Dashboard read",
+      "before": "No user role/session guard",
+      "after": "OWNER / OPS_ADMIN / STAFF allowed only after KalmaCore module permission allows OWNER_DASHBOARD"
+    },
+    {
+      "surface": "OPS alias",
+      "before": "No role normalization for Owner Dashboard",
+      "after": "OPS normalized to OPS_ADMIN only after Central Auth result; OPS is not independent authority"
+    },
+    {
+      "surface": "Owner-only guard",
+      "before": "No owner-only session helper",
+      "after": "kodRequireOwnerDashboardSession_ allows OWNER only"
+    },
+    {
+      "surface": "Client/localStorage",
+      "before": "No login/session UI",
+      "after": "localStorage stores token only; server validates session for permission"
+    }
+  ],
+  "regressionMatrix": [
+    {
+      "actor": "OWNER",
+      "roleBaseline": "no login gate / dashboard opened after spreadsheet auth",
+      "action": "Open dashboard",
+      "expectedBefore": "Dashboard loads if Apps Script can read source spreadsheets",
+      "expectedAfter": "Dashboard loads only after Central Auth OWNER permission + server session",
+      "proofFileFunction": "ui.html handleLogin/loadDashboard; 01_DASHBOARD_SERVICE.js kodGetOwnerDashboardV0"
+    },
+    {
+      "actor": "OWNER",
+      "roleBaseline": "manual authorization runner public",
+      "action": "Owner-only auth probe",
+      "expectedBefore": "kodAuthorizeOwnerDashboard could open source registry",
+      "expectedAfter": "kodAuthorizeOwnerDashboard requires OWNER server session first",
+      "proofFileFunction": "01_DASHBOARD_SERVICE.js kodAuthorizeOwnerDashboard"
+    },
+    {
+      "actor": "OPS_ADMIN",
+      "roleBaseline": "no role gate existed",
+      "action": "Staff-level dashboard read",
+      "expectedBefore": "No project role guard",
+      "expectedAfter": "Allowed only when KalmaCore allows OWNER_DASHBOARD and returns OPS_ADMIN",
+      "proofFileFunction": "00_CONFIG.js KOD_AUTH.roleSets.dashboardRead/staffLevel"
+    },
+    {
+      "actor": "legacy OPS",
+      "roleBaseline": "no role guard existed",
+      "action": "Legacy alias handling",
+      "expectedBefore": "Not handled",
+      "expectedAfter": "Normalized to OPS_ADMIN after Central Auth result; not local authority",
+      "proofFileFunction": "00_CONFIG.js KOD_AUTH.legacyRoleAliases; 07_CENTRAL_AUTH_SESSION.js kodNormalizeDashboardRole_"
+    },
+    {
+      "actor": "STAFF",
+      "roleBaseline": "no role gate existed",
+      "action": "Dashboard read",
+      "expectedBefore": "Could read if app URL accessible",
+      "expectedAfter": "Allowed only if Central Auth allows OWNER_DASHBOARD and role STAFF",
+      "proofFileFunction": "00_CONFIG.js KOD_AUTH.roleSets.dashboardRead"
+    },
+    {
+      "actor": "wrong role",
+      "roleBaseline": "no role gate existed",
+      "action": "Dashboard read",
+      "expectedBefore": "Not blocked by project auth",
+      "expectedAfter": "Blocked by kodRequireDashboardSession_ allowed role check",
+      "proofFileFunction": "07_CENTRAL_AUTH_SESSION.js kodRequireDashboardSession_"
+    },
+    {
+      "actor": "wrong PIN",
+      "roleBaseline": "no project login",
+      "action": "Login",
+      "expectedBefore": "No Owner Dashboard PIN validation",
+      "expectedAfter": "Rejected by KalmaCore.requireStaffRole; no local sheet compare",
+      "proofFileFunction": "07_CENTRAL_AUTH_SESSION.js kodRequireCentralStaffRole_"
+    },
+    {
+      "actor": "client-tampered localStorage",
+      "roleBaseline": "No session UI",
+      "action": "Read dashboard",
+      "expectedBefore": "N/A",
+      "expectedAfter": "Token must exist in server CacheService; client role ignored",
+      "proofFileFunction": "07_CENTRAL_AUTH_SESSION.js kodRequireDashboardSession_; ui.html localStorage token only"
+    },
+    {
+      "actor": "business flows",
+      "roleBaseline": "source readers V04A",
+      "action": "Data read/render",
+      "expectedBefore": "Read-only dashboard readers",
+      "expectedAfter": "Same readers untouched; only auth gate added before read",
+      "proofFileFunction": "02_SOURCE_READERS.js unchanged; 06_MASTER_APPROVAL_READER.js unchanged"
+    }
+  ],
+  "scanChecks": {
+    "kodGetOwnerDashboardV0RequiresServerSession": true,
+    "kodAuthorizeOwnerDashboardRequiresOwnerSession": true,
+    "centralAuthCallPresent": true,
+    "centralAuthModuleOwnerDashboard": true,
+    "serverSessionCreatePresent": true,
+    "serverSessionValidatePresent": true,
+    "legacyOpsAliasToOpsAdmin": true,
+    "ownerOnlyRoleSetOnlyOwner": true,
+    "opsAdminStaffLevelAllowed": true,
+    "uiPassesSessionTokenToDashboardEndpoint": true,
+    "uiLoginUsesServerEndpoint": true,
+    "uiValidateUsesServerEndpoint": true,
+    "localStorageOnlyStoresSessionToken": true
+  },
+  "localPinRetirementScan": {
+    "staffAccessExactFound": false,
+    "localPinCompareFound1": false,
+    "getRangePinColumn": false,
+    "localSheetLogin": false,
+    "passwordAuthority": false,
+    "clientRoleAuthorityPattern": false,
+    "result": "PASS"
+  },
+  "protectedActions": {
+    "kodGetOwnerDashboardV0": "server-side session required",
+    "kodAuthorizeOwnerDashboard": "OWNER-only server-side session required",
+    "kodPing": "public build ping only; no source data and no protected load/save/submit mutation"
+  },
+  "mutationScanChangedFiles": {
+    "appendRow": [],
+    "setValue": [],
+    "setValues": [],
+    "deleteRow": [],
+    "deleteRows": [],
+    "clearContent": [],
+    "copyTo": [],
+    "insertRow": [],
+    "insertRows": [],
+    "moveTo": [],
+    "removeFile": [],
+    "createFile": [],
+    "DriveApp.createFile": [],
+    "SpreadsheetApp.create": [],
+    "CASH_BANK_LEDGER": [],
+    "DIRECT_BANK_EXPENSE": [],
+    "PAYMENT_EXECUTION": [],
+    "LOG_TRANSAKSI": []
+  },
+  "noBusinessLogicMutationProof": {
+    "sourceReadersChanged": false,
+    "masterApprovalReaderChanged": false,
+    "notificationEngineChanged": false,
+    "businessLogicMutation": "NO"
+  },
+  "failedChecks": []
+}

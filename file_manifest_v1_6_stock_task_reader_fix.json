@@ -1,0 +1,162 @@
+[
+  {
+    "file": ".clasp.json",
+    "sha256": "7c70a8ab277a789250f8de49eb625e82520dbda2c032d44b4ba9930c44597b8a",
+    "bytes": 96
+  },
+  {
+    "file": ".clasp.json.template",
+    "sha256": "2bf873f7c0081448fdb62efdb227525e08b32cb24acc7cac74c96b5c0cb5bb18",
+    "bytes": 81
+  },
+  {
+    "file": ".claspignore",
+    "sha256": "25acca05bf8302a044cad5c5c6a2eb7391494dcb29cc6aeef112060c368088a6",
+    "bytes": 93
+  },
+  {
+    "file": "00_CONFIG.js",
+    "sha256": "630cd8735e0d3a15a142753de9a94a61019b287d7fd1e151fbcfa8b24f3a929c",
+    "bytes": 2473
+  },
+  {
+    "file": "01_DASHBOARD_SERVICE.js",
+    "sha256": "920b90c6ad4d383ff195262e9a54b445448f66c31623ca0107784a9bcc640409",
+    "bytes": 8037
+  },
+  {
+    "file": "02_SOURCE_READERS.js",
+    "sha256": "8df578e23628ceaad6f4bc3a29818712d7e842c44b6a5bac6457d1d5456f4354",
+    "bytes": 68877
+  },
+  {
+    "file": "Code.gs",
+    "sha256": "f58cdaaf76e4275826218514e1e71e9b66c299b0c462ae9dc8c49abf4295dc85",
+    "bytes": 354
+  },
+  {
+    "file": "README_AUTH_GATE_FIX.md",
+    "sha256": "24b672ee5b793511e05bc9c634605ec529f940a97d354cda45b5a4ba62326085",
+    "bytes": 756
+  },
+  {
+    "file": "README_CLASP_READY.md",
+    "sha256": "f9518a44b8610aa523667ebd450a616c899743c972e61969789a88a1637fa4d8",
+    "bytes": 726
+  },
+  {
+    "file": "README_NOT_CLASP_READY.md",
+    "sha256": "4f970658c20c31dfa659f3862b861502340b1fef094c30f7d684dc9551ef9eeb",
+    "bytes": 992
+  },
+  {
+    "file": "README_SCOPE_FIX.md",
+    "sha256": "496fa4442230869bff8949ed5ef3221a1c4977d565cc1f8895bb4f5675da0536",
+    "bytes": 703
+  },
+  {
+    "file": "README_V0_3_READABLE_ACTION_VIEW.md",
+    "sha256": "97f6602a6e8dfed736b57d2ccbb6f2c70a86ac5858dfb0b08a63b0ed5cccdb51",
+    "bytes": 426
+  },
+  {
+    "file": "README_V0_4_ACTION_READY_VIEW.md",
+    "sha256": "1b71a78bf3083ffe4b214bb3c5e1982a23e280379dd14603f363afaa84ca3ddd",
+    "bytes": 548
+  },
+  {
+    "file": "README_V0_5_CASH_SNAPSHOT_COMPUTED.md",
+    "sha256": "e0423555e8791025ce39afbfbc59fc8f572530ab36ce6ff488f7b63d046025a9",
+    "bytes": 567
+  },
+  {
+    "file": "README_V1_0_FULL_OWNER_COCKPIT.md",
+    "sha256": "b22e9b2749a162dca8e63b33db892cacb73026ba0092bb66430d44f8cf1a8556",
+    "bytes": 896
+  },
+  {
+    "file": "README_V1_1_SAFE_PRODUCTION_READER_HOTFIX.md",
+    "sha256": "917f22aa254fdc4c3113eef3c046a3d98ba7ad98477ce6fabe243441a7b62997",
+    "bytes": 974
+  },
+  {
+    "file": "README_V1_2_TRUSTED_READER_STABILIZED.md",
+    "sha256": "5e0f856a58fce07b9211803c6db3692ec07c67b29164f870fbfa838d372bfcc3",
+    "bytes": 697
+  },
+  {
+    "file": "README_V1_3_PRODUCTION_READER_REPAIR.md",
+    "sha256": "2bb5541dbf80d7beb9a978a7a4659e737e0543ae2f95a25aa322f00bfb7c8ee4",
+    "bytes": 676
+  },
+  {
+    "file": "README_V1_4_ACTIVE_PENDING_SOURCE_FIX.md",
+    "sha256": "0430b86fef675c1afde86d9c2479130d0a10c81f731604b92f9de5c8a319c131",
+    "bytes": 524
+  },
+  {
+    "file": "README_V1_5_CASH_STAFF_STOCK_DETAIL_FIX.md",
+    "sha256": "6727a77e7f500ed4f0e95b736da52b754c843bac7a43628373e0e02c2558e311",
+    "bytes": 502
+  },
+  {
+    "file": "README_V1_6_STOCK_TASK_READER_FIX.md",
+    "sha256": "d93af85e232b180266927981ec1b6f7ddd4c8ca79307a9997ab89bcd07feb73c",
+    "bytes": 405
+  },
+  {
+    "file": "appsscript.json",
+    "sha256": "e9f6e57e185bb54c542ef8976ac5209e73b2341f822c348aa8dc218b4418c706",
+    "bytes": 170
+  },
+  {
+    "file": "file_manifest_v1_0_full_owner_cockpit.json",
+    "sha256": "cd4fecd8b9e1a78ef4044bde8d7786a799cbcddfbd071c59000e3e046fb7357b",
+    "bytes": 2465
+  },
+  {
+    "file": "file_manifest_v1_1_safe_production_reader.json",
+    "sha256": "4b9fb67fc63f52de7951049719758a3b810d4e0889c200f0a07580434d13baa4",
+    "bytes": 5380
+  },
+  {
+    "file": "file_manifest_v1_2_trusted_reader_stabilized.json",
+    "sha256": "ccd4e0863c89c5a4d0102665353bba48ef57ace172efb992358c5b4db6925f05",
+    "bytes": 5543
+  },
+  {
+    "file": "file_manifest_v1_4_active_pending_source_fix.json",
+    "sha256": "f699da23dea69b582d6ecb871baf56c18443923b3fe9c1e1e01517260ad919a9",
+    "bytes": 6585
+  },
+  {
+    "file": "file_manifest_v1_5_cash_staff_stock_detail_fix.json",
+    "sha256": "a9c6b54933a0ca9eb90b24b37f665da956f69618952bbd994f9bf7eae1bf0a73",
+    "bytes": 4435
+  },
+  {
+    "file": "ui.html",
+    "sha256": "4bb96401780b9e188278804ce4920099449f2ed5e8b39a72c14164d360ac3684",
+    "bytes": 18478
+  },
+  {
+    "file": "v1_0_static_verification.json",
+    "sha256": "ea26bca83523603b498e08e94f1615c2546b2684a3d3bdf357bc0b9c15f8c04c",
+    "bytes": 425
+  },
+  {
+    "file": "v1_1_static_verification.json",
+    "sha256": "008514771112bf96c830d6e97a6f854a5657ba9d03022c0fb29c656254c3dccb",
+    "bytes": 694
+  },
+  {
+    "file": "v1_2_static_verification.json",
+    "sha256": "76144b145748b66e614e8025cd75eb3f15e3715c662c89105aa56b067b3372c2",
+    "bytes": 607
+  },
+  {
+    "file": "v1_5_static_verification.json",
+    "sha256": "072aed3b918285a1ccab5bb4b4817919ea6b6f0b430e9edcd8452f725d66ab89",
+    "bytes": 646
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "zip_integrity": "PENDING",
+  "appsscript_json_parse": "PASS",
+  "clasp_json_parse": "PASS",
+  "js_syntax": "PASS",
+  "ui_script_syntax": "PASS",
+  "write_path_scan": "PASS",
+  "new_posting": "NO",
+  "new_sync": "NO",
+  "ledger_mutation": "NO",
+  "row_deletion": "NO",
+  "changed_files": [
+    "00_CONFIG.js",
+    "01_DASHBOARD_SERVICE.js",
+    "02_SOURCE_READERS.js",
+    "ui.html"
+  ],
+  "owner_action": "NONE_FOR_QA"
+}

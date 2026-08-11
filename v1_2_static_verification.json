@@ -1,0 +1,26 @@
+{
+  "status": "STATIC_PASS",
+  "build": "KALMA_OWNER_DASHBOARD_V1_2_TRUSTED_READER_STABILIZED",
+  "zip_integrity": "PENDING_ZIP",
+  "duplicate_entries": 0,
+  "syntax_checked_by_node": [
+    "00_CONFIG.js",
+    "01_DASHBOARD_SERVICE.js",
+    "02_SOURCE_READERS.js"
+  ],
+  "write_path_scan": {
+    "appendRow": 7,
+    "setValue": 7,
+    "setValues": 6,
+    "deleteRow": 7,
+    "deleteRows": 5,
+    "clearContent": 7,
+    "SpreadsheetApp.flush": 0,
+    "createTrigger": 0,
+    "newTrigger": 0
+  },
+  "posting": "0 intended",
+  "sync": "0 intended",
+  "ledger_mutation": "0 intended",
+  "owner_action": "NONE"
+}

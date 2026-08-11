@@ -1,0 +1,11 @@
+{
+  "auth": {"pin":"fixture-only","role":"OWNER","module":"OWNER_DASHBOARD"},
+  "expected": {
+    "centralAuthLogin": "PASS",
+    "serverSessionRequired": true,
+    "dashboardCardCount": 5,
+    "sourceHealthCount": 7,
+    "readOnly": true,
+    "financePosting": false
+  }
+}

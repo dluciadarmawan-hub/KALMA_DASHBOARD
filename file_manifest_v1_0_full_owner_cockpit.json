@@ -1,0 +1,87 @@
+[
+  {
+    "file": ".clasp.json",
+    "bytes": 96,
+    "sha256": "7c70a8ab277a789250f8de49eb625e82520dbda2c032d44b4ba9930c44597b8a"
+  },
+  {
+    "file": ".clasp.json.template",
+    "bytes": 81,
+    "sha256": "2bf873f7c0081448fdb62efdb227525e08b32cb24acc7cac74c96b5c0cb5bb18"
+  },
+  {
+    "file": ".claspignore",
+    "bytes": 93,
+    "sha256": "25acca05bf8302a044cad5c5c6a2eb7391494dcb29cc6aeef112060c368088a6"
+  },
+  {
+    "file": "00_CONFIG.js",
+    "bytes": 2322,
+    "sha256": "1e3a25886ed8955ccfbf5af5a70e91de0205188e274904d681aa8e13e9a8065d"
+  },
+  {
+    "file": "01_DASHBOARD_SERVICE.js",
+    "bytes": 8056,
+    "sha256": "7996aecb5d7c9c1cb75ce067117052c158986754006fd4047aca093b4b8681cd"
+  },
+  {
+    "file": "02_SOURCE_READERS.js",
+    "bytes": 49172,
+    "sha256": "7d5dfe411c966daed14bd7032519ac2505e5f3e098f89f73c16b01ed3622c760"
+  },
+  {
+    "file": "Code.gs",
+    "bytes": 354,
+    "sha256": "f58cdaaf76e4275826218514e1e71e9b66c299b0c462ae9dc8c49abf4295dc85"
+  },
+  {
+    "file": "README_AUTH_GATE_FIX.md",
+    "bytes": 756,
+    "sha256": "24b672ee5b793511e05bc9c634605ec529f940a97d354cda45b5a4ba62326085"
+  },
+  {
+    "file": "README_CLASP_READY.md",
+    "bytes": 726,
+    "sha256": "f9518a44b8610aa523667ebd450a616c899743c972e61969789a88a1637fa4d8"
+  },
+  {
+    "file": "README_NOT_CLASP_READY.md",
+    "bytes": 992,
+    "sha256": "4f970658c20c31dfa659f3862b861502340b1fef094c30f7d684dc9551ef9eeb"
+  },
+  {
+    "file": "README_SCOPE_FIX.md",
+    "bytes": 703,
+    "sha256": "496fa4442230869bff8949ed5ef3221a1c4977d565cc1f8895bb4f5675da0536"
+  },
+  {
+    "file": "README_V0_3_READABLE_ACTION_VIEW.md",
+    "bytes": 426,
+    "sha256": "97f6602a6e8dfed736b57d2ccbb6f2c70a86ac5858dfb0b08a63b0ed5cccdb51"
+  },
+  {
+    "file": "README_V0_4_ACTION_READY_VIEW.md",
+    "bytes": 548,
+    "sha256": "1b71a78bf3083ffe4b214bb3c5e1982a23e280379dd14603f363afaa84ca3ddd"
+  },
+  {
+    "file": "README_V0_5_CASH_SNAPSHOT_COMPUTED.md",
+    "bytes": 567,
+    "sha256": "e0423555e8791025ce39afbfbc59fc8f572530ab36ce6ff488f7b63d046025a9"
+  },
+  {
+    "file": "README_V1_0_FULL_OWNER_COCKPIT.md",
+    "bytes": 896,
+    "sha256": "b22e9b2749a162dca8e63b33db892cacb73026ba0092bb66430d44f8cf1a8556"
+  },
+  {
+    "file": "appsscript.json",
+    "bytes": 170,
+    "sha256": "e9f6e57e185bb54c542ef8976ac5209e73b2341f822c348aa8dc218b4418c706"
+  },
+  {
+    "file": "ui.html",
+    "bytes": 17600,
+    "sha256": "a7a31c222ec56a3bef8d51a3a3bdb7e16c9f7bba7b940f40ad8644aae8f3289d"
+  }
+]

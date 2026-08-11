@@ -1,0 +1,24 @@
+{
+  "status": "STATIC_PASS",
+  "build": "KALMA_OWNER_DASHBOARD_V1_5_CASH_STAFF_STOCK_DETAIL_FIX",
+  "checks": {
+    "zip_integrity": "PASS_PENDING_ZIP_CREATE",
+    "js_syntax": "PASS_NODE_CHECK",
+    "ui_script_syntax": "PASS_NODE_CHECK",
+    "write_path_scan": "PASS_ZERO_MATCHES",
+    "appendRow": 0,
+    "setValue_setValues": 0,
+    "deleteRow_deleteRows": 0,
+    "clearContent": 0,
+    "posting": 0,
+    "sync": 0,
+    "ledger_mutation": 0
+  },
+  "changed_files": [
+    "00_CONFIG.js",
+    "02_SOURCE_READERS.js",
+    "ui.html",
+    "README_V1_5_CASH_STAFF_STOCK_DETAIL_FIX.md",
+    "file_manifest_v1_5_cash_staff_stock_detail_fix.json"
+  ]
+}

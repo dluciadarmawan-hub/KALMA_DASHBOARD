@@ -1,0 +1,221 @@
+{
+  "project": "KALMA OWNER DASHBOARD",
+  "build": "OWNERDASH_20260706_V05",
+  "baselineZip": "OWNERDASH_20260627_V04A.zip",
+  "baselineSha256": "75042d07ea58717acee92224d5c4cbc350dfe3498f8efb6debd042e43f70b6fa",
+  "L1": {
+    "jsGsParse": "PASS",
+    "uiHtmlScriptParse": "PASS",
+    "appsscriptJsonParse": "PASS",
+    "zipIntegrity": "PASS"
+  },
+  "L2": {
+    "centralAuthLibraryDependency": "PASS",
+    "dashboardEndpointServerSession": "PASS",
+    "localPinRetired": "PASS",
+    "localStaffSheetAuthority": "PASS",
+    "clientRoleAuthority": "PASS",
+    "ownerOnlyGate": "PASS",
+    "opsAdminAcceptedStaffLevel": "PASS"
+  },
+  "L3": {
+    "noBusinessReaderMutation": "PASS",
+    "noFinanceLedgerStockPurchasingInvoiceReceivingRevenueMutation": "PASS",
+    "noDeployClaimed": "PASS",
+    "noApprovalExecutionAdded": "PASS"
+  },
+  "parseDetails": [
+    {
+      "file": "00_CONFIG.js",
+      "ok": true,
+      "stderr": ""
+    },
+    {
+      "file": "00_NOTIFICATION_CONFIG.js",
+      "ok": true,
+      "stderr": ""
+    },
+    {
+      "file": "01_DASHBOARD_SERVICE.js",
+      "ok": true,
+      "stderr": ""
+    },
+    {
+      "file": "01_NOTIFICATION_ENGINE.js",
+      "ok": true,
+      "stderr": ""
+    },
+    {
+      "file": "02_NOTIFICATION_TRANSPORTS.js",
+      "ok": true,
+      "stderr": ""
+    },
+    {
+      "file": "02_SOURCE_READERS.js",
+      "ok": true,
+      "stderr": ""
+    },
+    {
+      "file": "03_NOTIFICATION_LOG_REPOSITORY.js",
+      "ok": true,
+      "stderr": ""
+    },
+    {
+      "file": "04_NOTIFICATION_INTEGRATION_ADAPTERS.js",
+      "ok": true,
+      "stderr": ""
+    },
+    {
+      "file": "05_NOTIFICATION_UTILS.js",
+      "ok": true,
+      "stderr": ""
+    },
+    {
+      "file": "06_MASTER_APPROVAL_READER.js",
+      "ok": true,
+      "stderr": ""
+    },
+    {
+      "file": "07_CENTRAL_AUTH_SESSION.js",
+      "ok": true,
+      "stderr": ""
+    },
+    {
+      "file": "99_NOTIFICATION_DEV_SELF_TESTS.js",
+      "ok": true,
+      "stderr": ""
+    },
+    {
+      "file": "Code.gs",
+      "ok": true,
+      "stderr": ""
+    }
+  ],
+  "jsonDetails": [
+    {
+      "file": ".clasp.json",
+      "ok": true
+    },
+    {
+      "file": "appsscript.json",
+      "ok": true
+    },
+    {
+      "file": "file_manifest_v1_0_full_owner_cockpit.json",
+      "ok": true
+    },
+    {
+      "file": "file_manifest_v1_1_safe_production_reader.json",
+      "ok": true
+    },
+    {
+      "file": "file_manifest_v1_2_trusted_reader_stabilized.json",
+      "ok": true
+    },
+    {
+      "file": "file_manifest_v1_4_active_pending_source_fix.json",
+      "ok": true
+    },
+    {
+      "file": "file_manifest_v1_5_cash_staff_stock_detail_fix.json",
+      "ok": true
+    },
+    {
+      "file": "file_manifest_v1_6_stock_task_reader_fix.json",
+      "ok": true
+    },
+    {
+      "file": "v1_0_static_verification.json",
+      "ok": true
+    },
+    {
+      "file": "v1_1_static_verification.json",
+      "ok": true
+    },
+    {
+      "file": "v1_2_static_verification.json",
+      "ok": true
+    },
+    {
+      "file": "v1_5_static_verification.json",
+      "ok": true
+    },
+    {
+      "file": "v1_6_static_verification.json",
+      "ok": true
+    },
+    {
+      "file": "v1_7_static_verification.json",
+      "ok": true
+    }
+  ],
+  "changedFiles": [
+    {
+      "status": "MODIFIED",
+      "file": "00_CONFIG.js",
+      "beforeSha256": "de4457bc43aeed5dbd463a05f38ad97468c34259bb322c3aed8934fcaec1a1d5",
+      "sha256": "2daab5093d14207b2f64dcae39cd12525363b08603c36306cd6c2632f8d4a092"
+    },
+    {
+      "status": "MODIFIED",
+      "file": "01_DASHBOARD_SERVICE.js",
+      "beforeSha256": "3f560130920749303a139c3c866170a89a98c7b4e93cd5618c24f2cc8638f3f2",
+      "sha256": "1aad4c132ea0ad30c128e78fe41db256b9e69be9dbbe932e0c9b33bc525dcc7f"
+    },
+    {
+      "status": "ADDED",
+      "file": "07_CENTRAL_AUTH_SESSION.js",
+      "sha256": "c037597371a4a29bcc66ff0467150948eddcd16f1e190d61ec81a7a9ddbde72c"
+    },
+    {
+      "status": "MODIFIED",
+      "file": "Code.gs",
+      "beforeSha256": "f58cdaaf76e4275826218514e1e71e9b66c299b0c462ae9dc8c49abf4295dc85",
+      "sha256": "3024ea1416aec5c61bdf8036c33b81b4c5bbe80d8d2b4aba804058e104d6634f"
+    },
+    {
+      "status": "MODIFIED",
+      "file": "appsscript.json",
+      "beforeSha256": "fcd46cdd653e254f2168267d586f0f77294ce6e68a22b7d17608c526ec4748f7",
+      "sha256": "450423e1547ef33cbfa43749e6d4ced56992670a348984c47df93b1d611b461f"
+    },
+    {
+      "status": "MODIFIED",
+      "file": "ui.html",
+      "beforeSha256": "197645387194bf945bf2ea1ae10d6c0b78c2863bf413b1599011c3d54728cf5a",
+      "sha256": "a09daea55663bdc34804d45c1968cff723de058b0a2479a074e2d491735acff9"
+    },
+    {
+      "status": "REMOVED_STALE_PROOF_ARTIFACT",
+      "file": "README_OWNERDASH_20260627_V04A_PROOF_HYGIENE.md",
+      "beforeSha256": "97ce70334d066660a2a413627001d3cbc898128f0d536bd98b3ba8a403351375"
+    },
+    {
+      "status": "REMOVED_STALE_PROOF_ARTIFACT",
+      "file": "candidate_row_render_proof_ownerdash_20260627_v04a.json",
+      "beforeSha256": "6dbfdf609599d484c9df4c45c4590442bf3395fe4c39bb29d28bdbecd9379862"
+    },
+    {
+      "status": "REMOVED_STALE_PROOF_ARTIFACT",
+      "file": "changed_file_list_ownerdash_20260627_v04a.md",
+      "beforeSha256": "517dc34bd93dda0b0df7d22f67460c93a3fe58241c8117b565e191da5848dc64"
+    },
+    {
+      "status": "REMOVED_STALE_PROOF_ARTIFACT",
+      "file": "file_manifest_ownerdash_20260627_v04a.json",
+      "beforeSha256": "d7d4a910c91d149c38a8a8ab8459ca47a2db70633cb35ce04af8c34372a0f237"
+    },
+    {
+      "status": "REMOVED_STALE_PROOF_ARTIFACT",
+      "file": "order_board_storage_probe_ownerdash_20260627_v04a.json",
+      "beforeSha256": "8e85bd8474ac1f9c13865259319ac67b5de0509b084eb38ff7a1c87d4da74921"
+    },
+    {
+      "status": "REMOVED_STALE_PROOF_ARTIFACT",
+      "file": "static_verification_ownerdash_20260627_v04a.json",
+      "beforeSha256": "c3f3ee015990422a9164d73e3b820afe06d8602f3a23b44c81e49f368a71e091"
+    }
+  ],
+  "failedChecks": [],
+  "outputZip": "OWNERDASH_20260706_V05.zip"
+}
