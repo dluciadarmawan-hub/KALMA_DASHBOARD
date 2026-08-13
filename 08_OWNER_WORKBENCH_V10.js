@@ -90,6 +90,28 @@ function kodBuildStableOwnerWork_(receiving, masterApproval, stock, cash, revenu
 function kodBuildOwnerBriefV10_(result) {
   const items = [];
   const ownerWork = result.ownerWork || [];
+
+  const cashAccounts = result.cashSnapshot || [];
+  const cashById = {};
+  cashAccounts.forEach(function(a) { cashById[String(a.account || '').toUpperCase()] = a; });
+  const bca = cashById.BCA_KALMA;
+  const mandiri = cashById.MANDIRI_CECE_QRIS;
+  const pettyKalma = cashById.PETTYCASH_KALMA;
+  const pettyCanteen = cashById.PETTYCASH_CANTEEN;
+  const keyCash = [bca, mandiri, pettyKalma, pettyCanteen].filter(Boolean);
+  if (keyCash.length) {
+    const primary = bca || keyCash[0];
+    const rest = keyCash.filter(function(a) { return a !== primary; }).map(function(a) {
+      return String(a.accountName || a.account || 'Account') + ' ' + String(a.balance || 'Rp0');
+    });
+    const pendingTotal = keyCash.reduce(function(sum, a) { return sum + (Number(a.pendingOut) || 0); }, 0);
+    const hasCashWarning = keyCash.some(function(a) { return !!a.warning; });
+    items.push({
+      tone: hasCashWarning ? 'warn' : 'ok',
+      title: 'Saldo terakhir · ' + String(primary.accountName || primary.account || 'Cash Bank') + ' ' + String(primary.balance || 'Rp0'),
+      note: (rest.length ? rest.join(' · ') : 'Cash Bank terbaca') + (pendingTotal > 0 ? ' · ada pending pembayaran' : '')
+    });
+  }
   const exactReceiving = ownerWork.filter(function(r) {
     return r.source === 'Receiving' && r.directExactTask === true;
   });
