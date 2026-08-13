@@ -22,6 +22,7 @@ function kodGetOwnerDashboardV0(payload) {
     invoiceSnapshot: [],
     receivingTasks: [],
     receivingTaskMeta: {},
+    ownerWork: [],
     drilldowns: {},
     notes: [
       'Dashboard V1 is read-only.',
@@ -33,7 +34,7 @@ function kodGetOwnerDashboardV0(payload) {
   const authGate = kodCheckDashboardAuthorization_();
   result.authGate = authGate;
   if (!authGate.ok) {
-    const blocked = ['MASTER_SCHEDULE', 'PURCHASING', 'REVENUE', 'CASH_BANK', 'STOCK_LOG', 'INVOICE_CUSTOMER', 'RECEIVING'].map(function(src) {
+    const blocked = ['MASTER_SCHEDULE', 'REVENUE', 'CASH_BANK', 'STOCK_LOG', 'INVOICE_CUSTOMER', 'ORDER_BOARD', 'RECEIVING'].map(function(src) {
       return { source: src, ok: false, note: 'AUTH_GATE_PENDING', checkedSheets: [] };
     });
     result.sourceHealth = blocked;
@@ -45,7 +46,6 @@ function kodGetOwnerDashboardV0(payload) {
   }
 
   const master = kodReadMasterScheduleSummary_();
-  const purchasing = kodReadPurchasingSummary_();
   const revenue = kodReadRevenueSummary_();
   const cash = kodReadCashBankSummary_();
   const stock = kodReadStockSummary_();
@@ -53,11 +53,11 @@ function kodGetOwnerDashboardV0(payload) {
   const masterApproval = kodReadOrderBoardMasterApprovalSummary_();
   const receiving = kodReadReceivingStockCountTasks_();
 
-  [master, purchasing, revenue, cash, stock, invoice, masterApproval, receiving].forEach(function(x) {
+  [master, revenue, cash, stock, invoice, masterApproval, receiving].forEach(function(x) {
     result.sourceHealth.push({ source: x.source, ok: x.ok, note: x.note || '', checkedSheets: x.checkedSheets || [], refreshedAt: x.refreshedAt || result.generatedAt });
   });
 
-  const pendingCount = (purchasing.pendingCount || 0) + (revenue.pendingCount || 0) + (cash.pendingRows || []).reduce(function(sum, x) { return sum + (Number(x.count) || 0); }, 0);
+  const pendingCount = (revenue.pendingCount || 0) + (cash.pendingRows || []).reduce(function(sum, x) { return sum + (Number(x.count) || 0); }, 0);
   const receivingActionCount = (receiving.rows || []).filter(function(r) { return r.actionable === true; }).length;
   const alertCount = (cash.warningCount || 0) + (stock.warningCount || 0);
   const hasProductionAction = (master.productionRows || []).some(function(r) { return r.pack === 'ACTION'; });
@@ -65,8 +65,8 @@ function kodGetOwnerDashboardV0(payload) {
   result.cards = [
     { key: 'receiving_stock_count', title: 'Receiving — Qty Stok Aktual', value: String(receivingActionCount), note: 'Exact deep-link task dari RECEIVING_STOCK_QTY_COUNT_TASK', tone: receivingActionCount ? 'danger' : (receiving.ok ? 'ok' : 'warn'), icon: '', drillKey: 'receiving' },
     { key: 'menu_besok', title: 'Menu Besok', value: master.menuCountText || '—', note: master.note || 'Master Schedule reader ready', tone: hasProductionAction ? 'warn' : (master.ok ? 'ok' : 'warn'), icon: '', drillKey: 'production' },
-    { key: 'pending_owner', title: 'Pending Source App', value: String(pendingCount), note: 'Purchasing + Revenue + Cash. Dikerjakan di source WebApp masing-masing.', tone: pendingCount ? 'warn' : 'ok', icon: '', drillKey: 'pending' },
-    { key: 'pending_master_approval', title: 'Order Board Pending', value: String(masterApproval.pendingCount || 0), note: 'Source app required. Belum actionable dari Dashboard.', tone: (masterApproval.pendingCount || 0) ? 'warn' : (masterApproval.ok ? 'ok' : 'warn'), icon: '', drillKey: 'masterApproval' },
+    { key: 'pending_owner', title: 'Revenue + Cash Bank', value: String(pendingCount), note: 'Task dari app stabil. Purchasing sengaja dikeluarkan sampai stabil.', tone: pendingCount ? 'warn' : 'ok', icon: '', drillKey: 'pending' },
+    { key: 'pending_master_approval', title: 'Order Board Pending', value: String(masterApproval.pendingCount || 0), note: 'Queue nyata dari Order Board; action tetap di source app.', tone: (masterApproval.pendingCount || 0) ? 'warn' : (masterApproval.ok ? 'ok' : 'warn'), icon: '', drillKey: 'masterApproval' },
     { key: 'alert_merah', title: 'Peringatan Penting', value: String(alertCount), note: 'Cash + stock warning. Invoice tampil terpisah.', tone: alertCount ? 'danger' : 'ok', icon: '', drillKey: 'warnings' }
   ];
 
@@ -74,7 +74,7 @@ function kodGetOwnerDashboardV0(payload) {
   result.pendingMasterApproval = masterApproval.rows || [];
   result.pendingMasterApprovalMeta = masterApproval.sourceMap || {};
   result.pendingMasterApprovalStorageProof = masterApproval.storageProof || {};
-  result.pending = [].concat(purchasing.pendingRows || [], revenue.pendingRows || [], cash.pendingRows || []);
+  result.pending = [].concat(revenue.pendingRows || [], cash.pendingRows || []);
   result.receivingTasks = receiving.rows || [];
   result.receivingTaskMeta = receiving.meta || {};
   result.staffTasks = [].concat(stock.staffTasks || []);
@@ -82,12 +82,13 @@ function kodGetOwnerDashboardV0(payload) {
   result.cashSnapshot = cash.accounts || [];
   result.stockSnapshot = stock.rows || [];
   result.invoiceSnapshot = invoice.rows || [];
-  result.drilldowns = kodBuildDrilldowns_(result, master, purchasing, revenue, cash, stock, invoice, masterApproval, receiving);
-  result.ownerBrief = kodBuildOwnerBrief_(result);
+  result.ownerWork = kodBuildStableOwnerWork_(receiving, masterApproval, stock, cash, revenue);
+  result.drilldowns = kodBuildDrilldowns_(result, master, revenue, cash, stock, invoice, masterApproval, receiving);
+  result.ownerBrief = kodBuildOwnerBriefV10_(result);
   return result;
 }
 
-function kodBuildDrilldowns_(result, master, purchasing, revenue, cash, stock, invoice, masterApproval, receiving) {
+function kodBuildDrilldowns_(result, master, revenue, cash, stock, invoice, masterApproval, receiving) {
   return {
     production: kodFlattenDetails_(result.production || [], master.productionDetails || []),
     pending: kodFlattenDetails_(result.pending || []),
@@ -97,7 +98,8 @@ function kodBuildDrilldowns_(result, master, purchasing, revenue, cash, stock, i
     cash: kodFlattenDetails_(result.cashSnapshot || []),
     stock: kodFlattenDetails_(result.stockSnapshot || []),
     invoice: kodFlattenDetails_(result.invoiceSnapshot || []),
-    receiving: kodFlattenDetails_(result.receivingTasks || [], (receiving && receiving.details) || [])
+    receiving: kodFlattenDetails_(result.receivingTasks || [], (receiving && receiving.details) || []),
+    ownerWork: kodFlattenDetails_(result.ownerWork || [])
   };
 }
 
@@ -170,7 +172,6 @@ function kodBuildSpeedDial_() {
     { label: 'Receiving', subtitle: 'Penerimaan + task qty stok aktual', url: KOD_ROUTE_LINKS.RECEIVING_WEBAPP, enabled: true, group: 'Operations' },
     { label: 'Order Board', subtitle: 'Order + master approval source', url: KOD_ROUTE_LINKS.ORDER_BOARD_WEBAPP, enabled: true, group: 'Operations' },
     { label: 'Master Schedule', subtitle: 'Menu, pack, KJS', url: KOD_ROUTE_LINKS.MASTER_SCHEDULE_WEBAPP, enabled: true, group: 'Operations' },
-    { label: 'Purchasing', subtitle: 'Nota, item, approval', url: KOD_ROUTE_LINKS.PURCHASING_WEBAPP, enabled: true, group: 'Finance' },
     { label: 'Revenue', subtitle: 'Customer bayar, sales', url: KOD_ROUTE_LINKS.REVENUE_WEBAPP, enabled: true, group: 'Finance' },
     { label: 'Cash Bank', subtitle: 'Saldo, cashbox, QRIS', url: KOD_ROUTE_LINKS.CASH_BANK_WEBAPP, enabled: true, group: 'Finance' },
     { label: 'Stock Log', subtitle: 'Stok kritis, movement', url: KOD_ROUTE_LINKS.STOCK_LOG_WEBAPP, enabled: true, group: 'Stock' },
