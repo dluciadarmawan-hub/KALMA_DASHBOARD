@@ -46,7 +46,7 @@ function kodGetOwnerDashboardV0(payload) {
   }
 
   const master = kodReadMasterScheduleSummary_();
-  const revenue = kodReadRevenueSummary_();
+  const revenue = kodReadRevenueSummaryV13_();
   const cash = kodReadCashBankSummary_();
   const stock = kodReadStockSummary_();
   const invoice = kodReadInvoiceSummary_();
