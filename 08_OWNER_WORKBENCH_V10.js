@@ -69,9 +69,9 @@ function kodBuildStableOwnerWork_(receiving, masterApproval, stock, cash, revenu
   });
 
   (revenue && revenue.pendingRows || []).forEach(function(r) {
-    if (r && r.kind === 'EXACT_TASK' && r.actionUrl && r.exactIdentity) {
+    if (r && r.directExactTask === true && r.actionUrl && r.exactIdentity) {
       out.push({
-        source:'Revenue', kind:'EXACT_TASK', taskType:r.taskType || '', title:r.title || 'Revenue', note:r.note || '',
+        source:'Revenue', kind:r.kind || 'ACTIONABLE_ROUTE', taskType:r.taskType || '', title:r.title || 'Revenue', note:r.note || '',
         count:1, actionLabel:r.actionLabel || 'PERIKSA', actionUrl:r.actionUrl, exactIdentity:r.exactIdentity,
         directExactTask:true, ownerFields:r.ownerFields || {}, details:[]
       });
