@@ -62,8 +62,8 @@ function kodBuildStableOwnerWork_(receiving, masterApproval, stock, cash, revenu
     out.push({
       source: 'Stock Log',
       kind: 'SOURCE_APP_QUEUE',
-      title: 'Stock task gagal exact identity',
-      note: stockBlocked.length + ' task fail-closed karena SUBMISSION_ID kosong/duplikat.',
+      title: 'Stock task belum direct',
+      note: stockBlocked.length + ' task fail-closed karena identity tidak aman atau source action authority belum terbukti.',
       count: stockBlocked.length,
       actionLabel: 'BUKA STOCK LOG',
       actionUrl: KOD_ROUTE_LINKS.STOCK_LOG_WEBAPP,
