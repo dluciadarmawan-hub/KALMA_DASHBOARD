@@ -493,12 +493,14 @@ function kodReadStockSummary_() {
     const groups = [
       { sheet: 'STOK_TERBARU', title: 'Stok kritis / minus', note: 'Stok terbaru', mode: 'stock_level' },
       { sheet: 'MASTER_STOK', title: 'Master stok low/minus', note: 'Master stok', mode: 'stock_level' },
-      { sheet: 'STOCK_SUBMISSION_QUEUE', title: 'Stock movement perlu review', note: 'Submission queue', needles: ['PENDING', 'NEEDS_REVIEW', 'NEEDS_APPROVAL'], exclude: ['CLOSED', 'DONE', 'APPROVED'] },
       { sheet: 'TASK_SUBMISSION', title: 'Task stok belum close', note: 'Task submission', needles: ['PENDING', 'OPEN', 'NEEDS'], exclude: ['CLOSED', 'DONE', 'APPROVED'] },
       { sheet: 'MATERIAL_USAGE_SUBMISSION', title: 'Pemakaian bahan pending', note: 'Material usage', needles: ['PENDING', 'OPEN', 'NEEDS'], exclude: ['CLOSED', 'DONE', 'APPROVED'] }
     ];
     const rows = [];
     let warn = 0;
+    const exactStockTaskPack = kodReadStockLogExactTasksV15_(ss);
+    if (exactStockTaskPack.checkedSheet) out.checkedSheets.push(exactStockTaskPack.checkedSheet);
+    warn += (exactStockTaskPack.rows || []).length + (exactStockTaskPack.nonActionable || []).length;
     const staffTaskPack = kodReadStockDailyStaffTasks_(ss);
     if (staffTaskPack.checkedSheet) out.checkedSheets.push(staffTaskPack.checkedSheet);
     groups.forEach(function(g) {
@@ -511,6 +513,14 @@ function kodReadStockSummary_() {
     });
     out.ok = true;
     out.warningCount = warn;
+    out.exactTasks = kodLimitRows_(exactStockTaskPack.rows || [], KOD_SAFE_LIMITS.maxDashboardRowsPerPanel);
+    out.nonActionableExactTasks = kodLimitRows_(exactStockTaskPack.nonActionable || [], KOD_SAFE_LIMITS.maxDashboardRowsPerPanel);
+    out.exactTaskMeta = {
+      sheet: exactStockTaskPack.checkedSheet || KOD_STOCKLOG_EXACT_V15.sheet,
+      scannedRows: exactStockTaskPack.scannedRows || 0,
+      duplicateIds: exactStockTaskPack.duplicateIds || [],
+      missingHeaders: exactStockTaskPack.missingHeaders || []
+    };
     out.rows = kodLimitRows_(kodSortActionRows_(rows), KOD_SAFE_LIMITS.maxDashboardRowsPerPanel);
     out.staffTasks = staffTaskPack.rows || [];
     out.staffTaskMeta = staffTaskPack.meta || {};

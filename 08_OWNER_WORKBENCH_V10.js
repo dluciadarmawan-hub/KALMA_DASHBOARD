@@ -38,21 +38,39 @@ function kodBuildStableOwnerWork_(receiving, masterApproval, stock, cash, revenu
     });
   }
 
-  (stock && stock.rows || []).filter(function(r) {
-    return String(r.type || '') === 'STOCK_SUBMISSION_QUEUE';
-  }).forEach(function(r) {
+  (stock && stock.exactTasks || []).forEach(function(r) {
+    if (r.actionable !== true || !r.actionUrl || !r.Submission_ID) return;
+    const qty = [r.Qty || '-', r.Unit || ''].filter(Boolean).join(' ');
+    const loc = r.To_Location || r.From_Location || '-';
+    out.push({
+      source: 'Stock Log',
+      kind: 'EXACT_TASK',
+      title: r.Item_Name || r.Item_Code || 'Stock movement',
+      note: [r.Action_Type || 'STOCK', qty, loc, r.Status || ''].filter(Boolean).join(' · '),
+      count: 1,
+      actionLabel: 'PERIKSA STOCK',
+      actionUrl: r.actionUrl,
+      exactIdentity: r.Submission_ID,
+      exactIdentityType: 'SUBMISSION_ID',
+      directExactTask: true,
+      details: []
+    });
+  });
+
+  const stockBlocked = (stock && stock.nonActionableExactTasks || []);
+  if (stockBlocked.length) {
     out.push({
       source: 'Stock Log',
       kind: 'SOURCE_APP_QUEUE',
-      title: r.title || 'Stock movement perlu review',
-      note: r.note || 'Submission queue',
-      count: Number(r.count || 0),
+      title: 'Stock task gagal exact identity',
+      note: stockBlocked.length + ' task fail-closed karena SUBMISSION_ID kosong/duplikat.',
+      count: stockBlocked.length,
       actionLabel: 'BUKA STOCK LOG',
       actionUrl: KOD_ROUTE_LINKS.STOCK_LOG_WEBAPP,
       directExactTask: false,
-      details: r.details || []
+      details: []
     });
-  });
+  }
 
   (cash && cash.pendingRows || []).forEach(function(r) {
     out.push({

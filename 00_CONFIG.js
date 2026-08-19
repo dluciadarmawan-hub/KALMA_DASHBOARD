@@ -3,10 +3,10 @@
  * READ ONLY. No sheet mutation. No posting. No sync.
  */
 const KOD_BUILD = Object.freeze({
-  name: 'OWNERDASH_20260814_V14',
-  status: 'BUILD_CANDIDATE__V14_REVENUE_ACTIONABLE_PAYMENT_ROUTING__READ_ONLY',
-  revision: 'OWNERDASH_20260814_V14_REVENUE_ACTIONABLE_PAYMENT_ROUTING',
-  date: '2026-08-14',
+  name: 'OWNERDASH_20260819_V15',
+  status: 'BUILD_CANDIDATE__V15_STOCKLOG_EXACT_TASK_ROUTING__READ_ONLY',
+  revision: 'OWNERDASH_20260819_V15_STOCKLOG_EXACT_TASK_ROUTING',
+  date: '2026-08-19',
   safety: 'READ_ONLY_OWNER_DASHBOARD__CENTRAL_AUTH_REQUIRED__NO_MASTER_OR_DOWNSTREAM_MUTATION'
 });
 
@@ -84,7 +84,7 @@ const KOD_MASTER_APPROVAL_R1 = Object.freeze({
   sourceBuild: 'ORDERBOARD_20260627_V25',
   sourceSha256: '1e918f251fcbaadfc1f2c2ed4e7bf35109d0c997194b8a008812e2e975810cc0',
   queueSheet: 'INBOUND_MASTER_APPROVAL_QUEUE',
-  dashboardBuild: 'OWNERDASH_20260814_V13',
+  dashboardBuild: 'OWNERDASH_20260819_V15',
   allowedReadOnlyColumns: [
     'Candidate_ID', 'Candidate_Type', 'Candidate_Status', 'Raw_Typed_Name', 'Normalized_Name', 'Source_Module',
     'First_Order_ID', 'First_Order_Line_ID', 'Source_Order_IDs', 'Source_Order_Line_IDs',
