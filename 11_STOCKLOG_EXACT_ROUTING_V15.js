@@ -7,6 +7,7 @@ const KOD_STOCKLOG_EXACT_V15 = Object.freeze({
   taskType: 'STOCK_REVIEW',
   sheet: 'STOCK_SUBMISSION_QUEUE',
   pendingStatuses: Object.freeze(['SUBMITTED', 'NEEDS_REVIEW', 'PENDING_REVIEW', 'NEEDS_RESOLUTION']),
+  directActionStatuses: Object.freeze(['SUBMITTED', 'NEEDS_REVIEW', 'PENDING_REVIEW']),
   requiredHeaders: Object.freeze([
     'SUBMISSION_ID','TIMESTAMP','SUBMITTER_NAME','ROLE','ACTION_TYPE','STATUS','DATE',
     'FROM_LOCATION','TO_LOCATION','ITEM_CODE','ITEM_NAME','QTY','UNIT','NOTE'
@@ -59,6 +60,8 @@ function kodReadStockLogExactTasksV15_(ss) {
     const fromLocation = String(values[r][index.FROM_LOCATION] || '').trim();
     const toLocation = String(values[r][index.TO_LOCATION] || '').trim();
     const uniqueIdentity = !!id && idCounts[id] === 1;
+    const sourceActionAuthorityProven = KOD_STOCKLOG_EXACT_V15.directActionStatuses.indexOf(status) >= 0;
+    const directExactTask = uniqueIdentity && sourceActionAuthorityProven;
     const row = {
       Submission_ID: id,
       Status: status,
@@ -77,12 +80,12 @@ function kodReadStockLogExactTasksV15_(ss) {
       exactIdentity: id,
       exactIdentityType: 'SUBMISSION_ID',
       existingActionAuthority: 'EXISTING_STOCK_LOG_REVIEW_CARD',
-      directExactTask: uniqueIdentity,
-      actionable: uniqueIdentity,
-      actionUrl: uniqueIdentity ? kodBuildStockLogExactTaskUrlV15_(id) : '',
-      failureCode: id ? (uniqueIdentity ? '' : 'DUPLICATE_IDENTITY') : 'MISSING_RECORD_ID'
+      directExactTask: directExactTask,
+      actionable: directExactTask,
+      actionUrl: directExactTask ? kodBuildStockLogExactTaskUrlV15_(id) : '',
+      failureCode: !id ? 'MISSING_RECORD_ID' : (!uniqueIdentity ? 'DUPLICATE_IDENTITY' : (!sourceActionAuthorityProven ? 'SOURCE_ACTION_AUTHORITY_REQUIRES_SOURCE_APP' : ''))
     };
-    if (uniqueIdentity) result.rows.push(row); else result.nonActionable.push(row);
+    if (directExactTask) result.rows.push(row); else result.nonActionable.push(row);
   }
   return result;
 }
